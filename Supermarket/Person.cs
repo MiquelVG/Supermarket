@@ -52,7 +52,8 @@ namespace Supermarket
 
         public int CompareTo(Person? other)
         {
-            throw new NotImplementedException();
+            if (other is null) return 1;
+            else return other.GetRating.CompareTo(this.GetRating);
         }
 
         public override string ToString()
