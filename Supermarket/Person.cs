@@ -38,7 +38,7 @@ namespace Supermarket
             set { active = value; }
         }
 
-        public abstract double GetRating { get ; }
+        public abstract double GetRating { get; }
 
         public void AddInvoicedAmount(double amount)
         {
