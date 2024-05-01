@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 
 namespace Supermarket
 {
-    abstract class Person : IComparable<Person>
+    public abstract class Person : IComparable<Person>
     {
-        private string _fullName;
-        private string _id;
-        private int _points;
-        private double _totalInvoiced;
+        protected string _fullName;
+        protected string _id;
+        protected int _points;
+        protected double _totalInvoiced;
         private bool active;
 
         protected Person(string id, string fullName, int points)
         {
-            if (id.Length != 8 || id == null) throw new Exception("INVALID ID");
             if (fullName == null) throw new ArgumentNullException("INVALID NAME");
             if (points < 0) throw new ArgumentOutOfRangeException("INVALID POINTS");
 
@@ -38,7 +37,7 @@ namespace Supermarket
             set { active = value; }
         }
 
-        public abstract double GetRating();
+        public abstract double GetRating { get; }
 
         public void AddInvoicedAmount(double amount)
         {
@@ -52,7 +51,7 @@ namespace Supermarket
 
         public int CompareTo(Person? other)
         {
-            throw new NotSupportedException();
+            throw new NotImplementedException();
         }
 
         public override string ToString()
