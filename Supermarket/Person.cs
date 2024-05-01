@@ -17,6 +17,7 @@ namespace Supermarket
 
         protected Person(string id, string fullName, int points)
         {
+            if (id == null) throw new Exception("INVALID ID");
             if (fullName == null) throw new ArgumentNullException("INVALID NAME");
             if (points < 0) throw new ArgumentOutOfRangeException("INVALID POINTS");
 
