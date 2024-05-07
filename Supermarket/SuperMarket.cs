@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -54,6 +55,33 @@ namespace Supermarket
             }
             r.Close();
             return staff;
+        }
+
+        private Dictionary<string, Person> LoadCustomers(string filename)
+        {
+            Dictionary<string, Person> customers = new Dictionary<string, Person>();
+            Customer customer;
+            StreamReader r = new StreamReader(filename);
+            string line;
+
+            line = r.ReadLine();
+
+            while (line != null)
+            {
+                string[] infoCustomer = line.Split(";");
+                if (infoCustomer[0] != "CASH")
+                {
+                    if (infoCustomer.Length == 3) customer = new Customer(infoCustomer[0], infoCustomer[1], Convert.ToInt32(infoCustomer[2]));
+                    else customer = new Customer(infoCustomer[0], infoCustomer[1], null);
+
+                    customers.Add(infoCustomer[0], customer);
+                }
+
+                line = r.ReadLine();
+            }
+            r.Close();
+
+            return customers;
         }
     }
 }
