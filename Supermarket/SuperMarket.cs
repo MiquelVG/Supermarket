@@ -31,6 +31,8 @@ namespace Supermarket
             this.address = address;
             this.activeLines = activeLines;
             this.staff = LoadCashier(fileCashiers);
+            this.customers = LoadCustomers(fileCustomers);
+            this.warehouse = LoadWarehous(fileItems);
 
         }
 
@@ -82,6 +84,31 @@ namespace Supermarket
             r.Close();
 
             return customers;
+        }
+
+        private SortedDictionary<int, Item> LoadWarehous(string fileName) 
+        {
+            SortedDictionary<int, Item> warehouse = new SortedDictionary<int, Item>();
+            Item stock;
+            StreamReader r = new StreamReader(fileName);
+            string line;
+            int i = 1;
+            line = r.ReadLine();
+            while (line != null)
+            {
+                string[] item = line.Split(";");
+                Category category = (Category)Convert.ToInt32(item[1]);
+                Packaging pack;
+                if (item[2] == "K") pack = Packaging.Kg;
+                else if (item[2] == "U") pack = Packaging.Unit;
+                else pack = Packaging.Package;
+                stock = new Item(i, item[0], false, Convert.ToDouble(item[3]), category ,pack, i + 5, i);
+                warehouse.Add(i, stock);
+                i++;
+                line = r.ReadLine();
+            }
+            r.Close();
+            return warehouse;
         }
     }
 }
