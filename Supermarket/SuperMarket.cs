@@ -28,7 +28,32 @@ namespace Supermarket
 
             this.name = name;
             this.address = address;
-            this.staff
+            this.activeLines = activeLines;
+            this.staff = LoadCashier(fileCashiers);
+
+        }
+
+        private Dictionary<string, Person> LoadCashier(string filename) 
+        {
+            Dictionary<string, Person> staff = new Dictionary<string, Person>();
+            StreamReader r = new StreamReader(filename);
+            string line;
+
+            line = r.ReadLine();
+            while (line != null)
+            {
+                string[] cashierInfo = line.Split(";");
+                string[] extraccioData = cashierInfo[3].Split(" ");
+                string[] dataFinal = extraccioData[0].Split("/");
+
+                DateTime hire = new DateTime(Convert.ToInt32(dataFinal[2]), Convert.ToInt32(dataFinal[1]), Convert.ToInt32(dataFinal[0]));
+                Cashier cashier = new Cashier(cashierInfo[0], cashierInfo[1], hire);
+                staff.Add(cashierInfo[0], cashier);
+
+                line = r.ReadLine();
+            }
+            r.Close();
+            return staff;
         }
     }
 }
