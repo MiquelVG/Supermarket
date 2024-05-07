@@ -63,22 +63,19 @@ namespace Supermarket
             {
                 if ((qty * -1) > item.stock) throw new Exception("STACKUNDERFLOW. NOT ENOUGH STOCK");
 
-                if (item.stock - (qty * -1) <= item.minStock) item.onSale = false;
-
                 item.stock += qty;
             }
             else //caso restock
             {
                 item.stock += qty;
                 if (!item.onSale) item.onSale = true;
-
             }    
         }
 
         public int CompareTo(Item? other)
         {
             if (other is null) return 1;
-            else return other.stock.CompareTo(this.stock);
+            else return this.stock.CompareTo(other.stock);
         }
 
         public override string ToString()
