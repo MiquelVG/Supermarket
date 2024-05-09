@@ -78,6 +78,23 @@ namespace Supermarket
             else return this.stock.CompareTo(other.stock);
         }
 
+        public override int GetHashCode()
+        {
+            return code;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            bool areEqual = true;
+            if (obj is null) areEqual = obj is null;
+            else if (obj is Item)
+            {
+                areEqual = ((Item)obj).code == code;
+            }
+            else areEqual = false;
+            return areEqual;
+        }
+
         public override string ToString()
         {
             StringBuilder item = new StringBuilder();
