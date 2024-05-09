@@ -49,6 +49,8 @@ namespace Supermarket
 
             Console.WriteLine();
             Console.WriteLine("--------- LOAD FILES ---------");
+            SuperMarket super = new SuperMarket("Mercadona","C/Carrer Eixample n21","CASHIERS.TXT","CUSTOMERS.TXT","GROCERIES.TXT",3);
+            Console.Write(super.ToString());
         }
     }
 }

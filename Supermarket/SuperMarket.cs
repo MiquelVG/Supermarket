@@ -71,9 +71,9 @@ namespace Supermarket
             while (line != null)
             {
                 string[] infoCustomer = line.Split(";");
-                if (infoCustomer[0] != "CASH")
+                if (infoCustomer[0] is not "CASH")
                 {
-                    if (infoCustomer.Length == 3) customer = new Customer(infoCustomer[0], infoCustomer[1], Convert.ToInt32(infoCustomer[2]));
+                    if (infoCustomer[2] is not "") customer = new Customer(infoCustomer[0], infoCustomer[1], Convert.ToInt32(infoCustomer[2]));
                     else customer = new Customer(infoCustomer[0], infoCustomer[1], null);
 
                     customers.Add(infoCustomer[0], customer);
@@ -94,7 +94,7 @@ namespace Supermarket
             string line;
             int i = 1;
             line = r.ReadLine();
-            while (line != null)
+            while (line != null) 
             {
                 string[] item = line.Split(";");
                 Category category = (Category)Convert.ToInt32(item[1]);
@@ -102,13 +102,35 @@ namespace Supermarket
                 if (item[2] == "K") pack = Packaging.Kg;
                 else if (item[2] == "U") pack = Packaging.Unit;
                 else pack = Packaging.Package;
-                stock = new Item(i, item[0], false, Convert.ToDouble(item[3]), category ,pack, i + 5, i);
+                stock = new Item(i, item[0], false, Convert.ToDouble(item[3]), category, pack, i + 5, i);
                 warehouse.Add(i, stock);
                 i++;
                 line = r.ReadLine();
             }
             r.Close();
             return warehouse;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"{this.name}    {this.address}  {this.activeLines}\n");
+            sb.Append("STAFF INFORMATION ---------------------------------------------\n");
+            foreach (KeyValuePair<string, Person> cashier in staff)
+            {
+                sb.Append($"{cashier.Value}\n");
+            }
+            sb.Append("COSTUMERS INFORMATION ---------------------------------------------\n");
+            foreach (KeyValuePair<string, Person> costumer in customers)
+            {
+                sb.Append($"{costumer.Value}\n");
+            }
+            sb.Append("STOCK INFORMATION ---------------------------------------------\n");
+            foreach (KeyValuePair<int, Item>item in warehouse)
+            {
+                sb.Append($"{item.Value}\n");
+            }
+            return sb.ToString();
         }
     }
 }
