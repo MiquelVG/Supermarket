@@ -26,7 +26,7 @@ namespace Supermarket
             }
         }
 
-        public override double GetRating { get { return (this.YearsOfService * 365.25) * ((this._totalInvoiced * 10) / 100); } }
+        public override double GetRating { get { return (this.YearsOfService * 365.25) * (this._totalInvoiced * 10 / 100); } }
 
         public override void AddPoints(int pointsToAdd)
         {
