@@ -31,7 +31,7 @@ namespace Supermarket
             Cashier preslava = new Cashier("724891D", "Preslava Radoslavova Aleksandrova", hired);
             Console.WriteLine(preslava.FullName);
             Console.WriteLine(preslava.YearsOfService);
-            preslava.AddInvoicedAmount(214.13);
+            preslava.AddInvoiceAmount(214.13);
             preslava.Active = true;
             preslava.AddPoints(40);
             Console.WriteLine(preslava);
@@ -41,7 +41,7 @@ namespace Supermarket
             Console.WriteLine("--------- TEST CUSTOMER ---------");
             Customer miquel = new Customer("724891D", "Miquel Vidal Gomila", 25);
             Console.WriteLine(miquel.FullName);
-            miquel.AddInvoicedAmount(44.3);
+            miquel.AddInvoiceAmount(44.3);
             Console.WriteLine(miquel.GetRating);
             miquel.Active = true;
             miquel.AddPoints(34);

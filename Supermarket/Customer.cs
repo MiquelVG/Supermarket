@@ -24,7 +24,7 @@ namespace Supermarket
 
             if (_fidelity_card is not null) _points += pointsToAdd;
         }
-
+        public int Points { get { return _points; } }
         public override string ToString()
         {
             return $"DNI/NIE->{_id} NOM->{_fullName}        RATING->{GetRating}     VENDES ->{_totalInvoiced}   \u20AC PUNTS->{_points}     {base.ToString()}";

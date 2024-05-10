@@ -40,7 +40,7 @@ namespace Supermarket
 
         public abstract double GetRating { get; }
 
-        public void AddInvoicedAmount(double amount)
+        public void AddInvoiceAmount(double amount)
         {
             if (amount == default(double)) throw new ArgumentNullException("INVALID AMOUNT");
             if (amount <= 0) throw new ArgumentOutOfRangeException("INVALID AMOUNT");
