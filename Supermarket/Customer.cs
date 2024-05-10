@@ -17,12 +17,12 @@ namespace Supermarket
 
         public override double GetRating => Math.Round((_totalInvoiced * 2) / 100,2);
 
-        public override void AddPoints(int points)
+        public override void AddPoints(int pointsToAdd)
         {
-            if (points <= 0) throw new ArgumentOutOfRangeException("POINTS CAN'T BE NEGATIVE OR ZERO");
-            if (points is default(int)) throw new ArgumentNullException("POINTS CAN'T BE NULL");
+            if (pointsToAdd <= 0) throw new ArgumentOutOfRangeException("POINTS CAN'T BE NEGATIVE OR ZERO");
+            if (pointsToAdd is default(int)) throw new ArgumentNullException("POINTS CAN'T BE NULL");
 
-            if (_fidelity_card is not null) _points += points;
+            if (_fidelity_card is not null) _points += pointsToAdd;
         }
 
         public override string ToString()
