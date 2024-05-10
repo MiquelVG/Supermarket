@@ -63,12 +63,11 @@ namespace Supermarket
             {
                 if ((qty * -1) > item.stock) throw new Exception("STACKUNDERFLOW. NOT ENOUGH STOCK");
 
-                item.stock += qty;
+                item.stock -= qty;
             }
             else //caso restock
             {
                 item.stock += qty;
-                if (!item.onSale) item.onSale = true;
             }    
         }
 
