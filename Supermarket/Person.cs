@@ -53,7 +53,7 @@ namespace Supermarket
         public int CompareTo(Person? other)
         {
             if (other is null) return 1;
-            else return this.GetRating.CompareTo(other.GetRating);
+            else return other.GetRating.CompareTo(this.GetRating);
         }
 
         public override string ToString()
