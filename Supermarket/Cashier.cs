@@ -20,20 +20,20 @@ namespace Supermarket
             get 
             {
                 TimeSpan difference = DateTime.Now - _joiningDate;
-                int years = (int)(difference.TotalDays / 365.25);
+                int years = (int)difference.TotalDays / 365;
 
                 return years;
             }
         }
 
-        public override double GetRating { get { return (this.YearsOfService * 365.25) * (this._totalInvoiced * 10 / 100); } }
+        public override double GetRating { get { return (this.YearsOfService * 365.25) * ((this._totalInvoiced * 10) / 100); } }
 
         public override void AddPoints(int pointsToAdd)
         {
             if (pointsToAdd <= 0) throw new IndexOutOfRangeException("POINTS CAN'T BE NEGATIVE OR ZERO");
             if (pointsToAdd is default(int)) throw new ArgumentNullException("POINTS CAN'T BE NULL");
 
-            _points += (this.YearsOfService + 1) * pointsToAdd;  
+            _points += (this.YearsOfService + 1 ) * pointsToAdd;  
         }
 
         public override string ToString()
