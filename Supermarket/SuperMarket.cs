@@ -14,9 +14,9 @@ namespace Supermarket
         private string address;
         private int activeLines;
         // private CheckOutLine[] lines = new CheckOutLine[MAXLINES];
-        private Dictionary<string,Person> staff;
-        private Dictionary<string, Person> customers;
-        private SortedDictionary<int, Item> warehouse;
+        public Dictionary<string, Person> staff;
+        public Dictionary<string, Person> customers;
+        public SortedDictionary<int, Item> warehouse;
 
         public SuperMarket(string name, string address, string fileCashiers, string fileCustomers, string fileItems, int activeLines)
         {
@@ -36,7 +36,7 @@ namespace Supermarket
 
         }
 
-        private Dictionary<string, Person> LoadCashier(string filename) 
+        private Dictionary<string, Person> LoadCashier(string filename)
         {
             Dictionary<string, Person> staff = new Dictionary<string, Person>();
             StreamReader r = new StreamReader(filename);
@@ -86,7 +86,7 @@ namespace Supermarket
             return customers;
         }
 
-        private SortedDictionary<int, Item> LoadWarehous(string fileName) 
+        private SortedDictionary<int, Item> LoadWarehous(string fileName)
         {
             SortedDictionary<int, Item> warehouse = new SortedDictionary<int, Item>();
             Item stock;
@@ -94,7 +94,7 @@ namespace Supermarket
             string line;
             int i = 1;
             line = r.ReadLine();
-            while (line != null) 
+            while (line != null)
             {
                 string[] item = line.Split(";");
                 Category category = (Category)Convert.ToInt32(item[1]);
@@ -110,7 +110,6 @@ namespace Supermarket
             r.Close();
             return warehouse;
         }
-
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
