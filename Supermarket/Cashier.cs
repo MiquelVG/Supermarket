@@ -34,6 +34,7 @@ namespace Supermarket
                 TimeSpan diferencia = DateTime.Now - _joiningDate;
                 int days = Convert.ToInt32(diferencia.TotalDays);
                 double rating = days + (_points * 0.1);
+
                 return rating; 
             } 
         
