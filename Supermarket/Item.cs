@@ -73,8 +73,11 @@ namespace Supermarket
 
         public int CompareTo(Item? other)
         {
-            if (other is null) return 1;
-            else return this.stock.CompareTo(other.stock);
+            int resultat;
+            if (other is null) resultat = 1;
+            else resultat = this.stock.CompareTo(other.stock);
+
+            return resultat;
         }
 
         public override int GetHashCode()
