@@ -161,7 +161,9 @@ namespace Supermarket
         }
         #endregion
 
+        #region PROPERTIES
 
+        #endregion
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
