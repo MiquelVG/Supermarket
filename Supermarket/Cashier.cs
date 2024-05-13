@@ -27,7 +27,18 @@ namespace Supermarket
             }
         }
 
-        public override double GetRating { get { return (this.YearsOfService * 365.25) * ((this._totalInvoiced * 10) / 100); } }
+        public override double GetRating 
+        {
+            get 
+            {
+                TimeSpan diferencia = DateTime.Now - _joiningDate;
+                int days = Convert.ToInt32(diferencia.TotalDays);
+                double rating = days + (_points * 0.1);
+
+                return rating; 
+            } 
+        
+        }
 
         public override void AddPoints(int pointsToAdd)
         {
