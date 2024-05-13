@@ -31,6 +31,12 @@ namespace Supermarket
         protected Person(string id, string fullName) : this(id, fullName, 0) { }
 
         public string FullName { get { return _fullName; } }
+
+        public string ID { get { return _id; } }
+
+        public int Points { get { return _points; } }
+
+        public double TotalInvoiced { get { return _totalInvoiced; } }
         
         public bool Active
         {
