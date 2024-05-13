@@ -111,6 +111,61 @@ namespace Supermarket
             r.Close();
             return warehouse;
         }
+        #endregion
+
+        #region METHODS SUPERMARKET
+        public HashSet<Item> GetItemsByStock()
+        {
+            HashSet<Item> stock = new HashSet<Item>();
+            foreach (KeyValuePair<int, Item> item in warehouse)
+            {
+                stock.Add(item.Value);
+            }
+            return stock;
+        }
+        #endregion
+
+        #region METHODS ENABLE CUSTOMER AND CASHIER
+        public Person GetAvailableCustomer()
+        {
+            Person[] valorCustomer = customers.Values.ToArray();
+            Person availableCustomer = null;
+            int i = 0;
+            while (i <= valorCustomer.Length && availableCustomer == null)
+            {
+                if (valorCustomer[i].Active)
+                {
+
+                    availableCustomer = valorCustomer[i];
+                    valorCustomer[i].Active = false;
+                }
+                else i++;
+            }
+            return availableCustomer;
+        }
+        public Person GetAvailableCashier(Person cashier)
+        {
+            Person[] valorStaff = staff.Values.ToArray();
+            Person availableStaff = null;
+            int i = 0;
+            while (i <= valorStaff.Length && availableStaff == null)
+            {
+                if (valorStaff[i].Active)
+                {
+                    availableStaff = valorStaff[i];
+                    valorStaff[i].Active = false;
+                }
+                else i++;
+            }
+
+            return availableStaff;
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        #endregion
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
