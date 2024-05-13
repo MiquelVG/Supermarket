@@ -15,9 +15,10 @@ namespace Supermarket
             this._joiningDate = hired;
         }
 
-        public int YearsOfService 
+        #region PROPERTIES
+        public int YearsOfService
         {
-            get 
+            get
             {
 
                 TimeSpan difference = DateTime.Now - _joiningDate;
@@ -26,18 +27,20 @@ namespace Supermarket
                 return years;
             }
         }
+        #endregion
 
-        public override double GetRating 
+        #region OVERRIDE
+        public override double GetRating
         {
-            get 
+            get
             {
                 TimeSpan diferencia = DateTime.Now - _joiningDate;
                 int days = Convert.ToInt32(diferencia.TotalDays);
                 double rating = days + (_points * 0.1);
 
-                return rating; 
-            } 
-        
+                return rating;
+            }
+
         }
 
         public override void AddPoints(int pointsToAdd)
@@ -45,12 +48,14 @@ namespace Supermarket
             if (pointsToAdd <= 0) throw new IndexOutOfRangeException("POINTS CAN'T BE NEGATIVE OR ZERO");
             if (pointsToAdd is default(int)) throw new ArgumentNullException("POINTS CAN'T BE NULL");
 
-            _points += (this.YearsOfService + 1 ) * pointsToAdd;  
+            _points += (this.YearsOfService + 1) * pointsToAdd;
         }
 
         public override string ToString()
         {
             return $"DNI/NIE -> {_id}  NOM -> {_fullName}       RATING -> {this.GetRating}  ANTIGUITAT -> {this.YearsOfService} VENDES -> {_totalInvoiced} \u20AC     PUNTS -> {_points}  {base.ToString()}";
         }
+        #endregion
+
     }
 }

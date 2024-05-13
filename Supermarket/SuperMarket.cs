@@ -14,9 +14,9 @@ namespace Supermarket
         private string address;
         private int activeLines;
         // private CheckOutLine[] lines = new CheckOutLine[MAXLINES];
-        public Dictionary<string, Person> staff;
-        public Dictionary<string, Person> customers;
-        public SortedDictionary<int, Item> warehouse;
+        private Dictionary<string, Person> staff;
+        private Dictionary<string, Person> customers;
+        private SortedDictionary<int, Item> warehouse;
 
         public SuperMarket(string name, string address, string fileCashiers, string fileCustomers, string fileItems, int activeLines)
         {
@@ -36,6 +36,7 @@ namespace Supermarket
 
         }
 
+        #region CHARGE DICTIONARY FROM FILE
         private Dictionary<string, Person> LoadCashier(string filename)
         {
             Dictionary<string, Person> staff = new Dictionary<string, Person>();
@@ -110,6 +111,58 @@ namespace Supermarket
             r.Close();
             return warehouse;
         }
+        #endregion
+
+        #region METHODS SUPERMARKET
+        public HashSet<Item> GetItemsByStock()
+        {
+            HashSet<Item> stock = new HashSet<Item>();
+            foreach (KeyValuePair<int, Item> item in warehouse)
+            {
+                stock.Add(item.Value);
+            }
+            return stock;
+        }
+        #endregion
+
+        #region METHODS ENABLE CUSTOMER AND CASHIER
+        public Person GetAvailableCustomer()
+        {
+            Person[] valorCustomer = customers.Values.ToArray();
+            Person availableCustomer = null;
+            int i = 0;
+            while (i <= valorCustomer.Length && availableCustomer == null)
+            {
+                if (valorCustomer[i].Active)
+                {
+
+                    availableCustomer = valorCustomer[i];
+                    valorCustomer[i].Active = false;
+                }
+                else i++;
+            }
+            return availableCustomer;
+        }
+        public Person GetAvailableCashier(Person cashier)
+        {
+            Person[] valorStaff = staff.Values.ToArray();
+            Person availableStaff = null;
+            int i = 0;
+            while (i <= valorStaff.Length && availableStaff == null)
+            {
+                if (valorStaff[i].Active)
+                {
+
+                    availableStaff = valorStaff[i];
+                    valorStaff[i].Active = false;
+                }
+                else i++;
+            }
+            return availableStaff;
+        }
+        #endregion
+
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
