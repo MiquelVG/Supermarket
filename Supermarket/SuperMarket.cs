@@ -14,9 +14,9 @@ namespace Supermarket
         private string address;
         private int activeLines;
         // private CheckOutLine[] lines = new CheckOutLine[MAXLINES];
-        public Dictionary<string, Person> staff;
-        public Dictionary<string, Person> customers;
-        public SortedDictionary<int, Item> warehouse;
+        private Dictionary<string, Person> staff;
+        private Dictionary<string, Person> customers;
+        private SortedDictionary<int, Item> warehouse;
 
         public SuperMarket(string name, string address, string fileCashiers, string fileCustomers, string fileItems, int activeLines)
         {
@@ -36,6 +36,7 @@ namespace Supermarket
 
         }
 
+        #region CHARGE DICTIONARY FROM FILE
         private Dictionary<string, Person> LoadCashier(string filename)
         {
             Dictionary<string, Person> staff = new Dictionary<string, Person>();
@@ -110,7 +111,6 @@ namespace Supermarket
             r.Close();
             return warehouse;
         }
-
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
