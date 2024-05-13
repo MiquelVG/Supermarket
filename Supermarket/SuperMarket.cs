@@ -164,6 +164,14 @@ namespace Supermarket
 
         #region PROPERTIES
 
+        public SortedDictionary<int, Item> Warehouse { get { return warehouse; } }
+
+        public Dictionary<string, Person> Staff { get { return staff; } }
+
+        public Dictionary<string, Person> Customers { get { return customers; } }
+
+        public int ActiveLines { get { return activeLines; } }
+
         #endregion
 
         public override string ToString()
