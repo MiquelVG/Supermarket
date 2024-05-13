@@ -152,7 +152,6 @@ namespace Supermarket
             {
                 if (valorStaff[i].Active)
                 {
-
                     availableStaff = valorStaff[i];
                     valorStaff[i].Active = false;
                 }
