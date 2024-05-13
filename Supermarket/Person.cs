@@ -30,6 +30,7 @@ namespace Supermarket
 
         protected Person(string id, string fullName) : this(id, fullName, 0) { }
 
+        #region PROPERTIES
         public string FullName { get { return _fullName; } }
 
         public string ID { get { return _id; } }
@@ -37,15 +38,22 @@ namespace Supermarket
         public int Points { get { return _points; } }
 
         public double TotalInvoiced { get { return _totalInvoiced; } }
-        
+
         public bool Active
         {
             get { return active; }
             set { active = value; }
         }
+        #endregion
 
+        #region ABSTRACT
         public abstract double GetRating { get; }
 
+        public abstract void AddPoints(int points);
+
+        #endregion
+
+        #region METHODS
         public void AddInvoiceAmount(double amount)
         {
             if (amount == default(double)) throw new ArgumentNullException("INVALID AMOUNT");
@@ -53,8 +61,7 @@ namespace Supermarket
 
             _totalInvoiced += amount;
         }
-
-        public abstract void AddPoints(int points);
+        #endregion
 
         public int CompareTo(Person? other)
         {

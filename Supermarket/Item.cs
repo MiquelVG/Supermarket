@@ -41,6 +41,7 @@ namespace Supermarket
             this.minStock = minStock;
         }
 
+        #region PROPERTIES
         public double Stock { get { return stock; } }
         public int MinStock { get { return minStock; } }
         public Packaging PackagingType { get { return packaging; } }
@@ -48,15 +49,18 @@ namespace Supermarket
         public Category GetCategory { get { return category; } }
         public bool OnSale { get { return onSale; } }
 
-        public double Price 
+        public double Price
         {
-            get 
+            get
             {
                 double finalPrice = price;
                 if (onSale) finalPrice -= (price * 10) / 100;
                 return Math.Round(finalPrice);
             }
         }
+        #endregion
+
+        #region METHODS
         public static void UpdateStock(Item item, double qty)
         {
             if (qty < 0)//caso de compra
@@ -68,8 +72,9 @@ namespace Supermarket
             else //caso restock
             {
                 item.stock += qty;
-            }    
+            }
         }
+        #endregion
 
         public int CompareTo(Item? other)
         {
@@ -80,6 +85,7 @@ namespace Supermarket
             return resultat;
         }
 
+        #region OVERRIDE
         public override int GetHashCode()
         {
             return code;
@@ -105,5 +111,10 @@ namespace Supermarket
             else item.Append("ON SALE -> N");
             return item.ToString();
         }
+        #endregion
+
+        
+
+        
     }
 }
