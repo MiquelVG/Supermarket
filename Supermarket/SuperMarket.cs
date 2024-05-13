@@ -157,6 +157,7 @@ namespace Supermarket
                 }
                 else i++;
             }
+
             return availableStaff;
         }
         #endregion
