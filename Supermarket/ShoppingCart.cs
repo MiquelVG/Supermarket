@@ -16,7 +16,7 @@ namespace Supermarket
         {
             if (customer is null) throw new ArgumentNullException("INVALID CUSTOMER");
 
-            shoppingList = new Dictionary<Item, double>();
+            this.shoppingList = new Dictionary<Item, double>();
             this.customer = customer;
             this.customer.Active = true;
             this.dateOfPurchase = dateOfPurchase;
