@@ -133,11 +133,11 @@ namespace Supermarket
             int i = 0;
             while (i <= valorCustomer.Length && availableCustomer == null)
             {
-                if (valorCustomer[i].Active)
+                if (!valorCustomer[i].Active)
                 {
 
                     availableCustomer = valorCustomer[i];
-                    valorCustomer[i].Active = false;
+                    valorCustomer[i].Active = true;
                 }
                 else i++;
             }
@@ -150,10 +150,10 @@ namespace Supermarket
             int i = 0;
             while (i <= valorStaff.Length && availableStaff == null)
             {
-                if (valorStaff[i].Active)
+                if (!valorStaff[i].Active)
                 {
                     availableStaff = valorStaff[i];
-                    valorStaff[i].Active = false;
+                    valorStaff[i].Active = true;
                 }
                 else i++;
             }

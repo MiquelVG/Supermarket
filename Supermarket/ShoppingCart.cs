@@ -32,13 +32,22 @@ namespace Supermarket
 
         public void AddOne(Item item, double qty)
         {
+            bool existeix = false;
+
             foreach(KeyValuePair<Item, double> kvp in shoppingList)
             {
                 if (kvp.Key == item)
                 {
-                    if(kvp.Key.GetCategory == )
+                    existeix = true;
+                    if(kvp.Key.PackagingType == Packaging.Unit || kvp.Key.PackagingType == Packaging.Package)
+                    {
+                        if (Convert.ToString(qty).Contains(".")) throw new Exception("QUANTITY CANNOT HAVE DECIMALS WHEN THE ITEM PACKAGING IS UNITS OR PACKAGES");
+                        shoppingList[kvp.Key] += qty;
+                    }
+                    else shoppingList[kvp.Key] += qty;
                 }
             }
+            if (!existeix) shoppingList.Add(item, qty);
         }
     }
 }
