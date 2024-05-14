@@ -16,7 +16,7 @@ namespace Supermarket
         {
             if (customer is null) throw new ArgumentNullException("INVALID CUSTOMER");
 
-            shoppingList = new Dictionary<Item, double>();
+            this.shoppingList = new Dictionary<Item, double>();
             this.customer = customer;
             this.customer.Active = true;
             this.dateOfPurchase = dateOfPurchase;
@@ -48,6 +48,23 @@ namespace Supermarket
                 }
             }
             if (!existeix) shoppingList.Add(item, qty);
+        }
+        public void AddAllRandomly(SortedDictionary<int, Item> warehouse) 
+        {
+            Random qtyItems = new Random();
+            Random itemsQty = new Random();
+            Random randomItem = new Random();
+            int qItems = 0, iQty = 0, rItem = 0;
+
+            qItems = qtyItems.Next(1, 11);
+            
+            for (int i = 0; i <= qItems; i++)
+            {
+                rItem = randomItem.Next(0, warehouse.Count);
+                iQty = itemsQty.Next(1, 5);
+                AddOne(warehouse[rItem], iQty);
+            }
+
         }
     }
 }
