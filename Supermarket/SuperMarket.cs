@@ -36,7 +36,7 @@ namespace Supermarket
 
         }
 
-        #region CHARGE DICTIONARY FROM FILE
+        #region LOAD DICTIONARIES FROM FILES
         private Dictionary<string, Person> LoadCashier(string filename)
         {
             Dictionary<string, Person> staff = new Dictionary<string, Person>();
@@ -125,7 +125,7 @@ namespace Supermarket
         }
         #endregion
 
-        #region METHODS ENABLE CUSTOMER AND CASHIER
+        #region METHODS TO GET CUSTOMER AND CASHIER
         public Person GetAvailableCustomer()
         {
             Person[] valorCustomer = customers.Values.ToArray();
