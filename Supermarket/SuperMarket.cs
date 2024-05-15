@@ -93,7 +93,7 @@ namespace Supermarket
             Item stock;
             StreamReader r = new StreamReader(fileName);
             string line;
-            int i = 1;
+            int i = 0;
             line = r.ReadLine();
             while (line != null)
             {
