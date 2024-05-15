@@ -48,6 +48,7 @@ namespace Supermarket
         public string Description { get { return description; } }
         public Category GetCategory { get { return category; } }
         public bool OnSale { get { return onSale; } }
+        public char Currency { get { return currency; } }
 
         public double Price
         {
