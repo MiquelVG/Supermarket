@@ -13,7 +13,7 @@ namespace Supermarket
         private string name;
         private string address;
         private int activeLines;
-        // private CheckOutLine[] lines = new CheckOutLine[MAXLINES];
+        //private CheckOutLine[] lines = new CheckOutLine[MAXLINES];
         private Dictionary<string, Person> staff;
         private Dictionary<string, Person> customers;
         private SortedDictionary<int, Item> warehouse;
