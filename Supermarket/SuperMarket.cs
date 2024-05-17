@@ -224,6 +224,13 @@ namespace Supermarket
         }
 
         public bool JoinTheQueue(ShoppingCart theCart, int line)
+        {
+            bool posible = false;
+
+
+
+            return posible;
+        }
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
