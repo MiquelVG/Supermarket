@@ -185,7 +185,7 @@ namespace Super
                         if (cua != null && cua.Active) disponible = true;
                         i++;
                     }
-                    super.JoinTheQueue(cart, i + 1);
+                    super.JoinTheQueue(cart, i);
                 }
                 else Console.WriteLine("NO HI HA CAIXES ACTIVES");
             }
@@ -220,11 +220,11 @@ namespace Super
         public static bool DoOpenCua(SuperMarket super)
         {
             bool fet = true;
-            int line = super.ActiveLines+1;
+            int line = super.ActiveLines;
 
             if (line >= 6)
             {
-                Console.WriteLine("NO HI H CUES PER OBRIR");
+                Console.WriteLine("NO HI HA CUES PER OBRIR");
                 fet = false;
             }
             else super.OpenCheckOutLine(line);
