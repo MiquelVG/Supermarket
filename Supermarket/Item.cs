@@ -24,12 +24,11 @@ namespace Supermarket
 
         public Item(int code, string description, bool onSale, double price, Category category, Packaging packaging, double stock, int minStock)
         {
-            if (code is default(int)) throw new ArgumentNullException("INVALID CODE");
-            if (code <= 0) throw new ArgumentOutOfRangeException("CODE CAN'T BE NEGATIVE OR ZERO");
+            if (code < 0) throw new ArgumentOutOfRangeException("CODE CAN'T BE NEGATIVE OR ZERO");
             if (description is null || description == "") throw new ArgumentNullException("DESCRIPTION CAN'T BE NULL");
             if (price <= 0) throw new ArgumentOutOfRangeException("PRICE CAN'T BE NEGATIVE OR ZERO");
             if (stock < minStock) throw new ArgumentOutOfRangeException("STOCK CAN'T BE LOWER THAN THE MINIMUM STOCK");
-            if (minStock <= 0) throw new ArgumentOutOfRangeException("MINIMUM STOCK CAN'T BE LOWER THAN ZERO OR ZERO");
+            if (minStock < 0) throw new ArgumentOutOfRangeException("MINIMUM STOCK CAN'T BE LOWER THAN ZERO OR ZERO");
 
             this.code = code;
             this.description = description;
