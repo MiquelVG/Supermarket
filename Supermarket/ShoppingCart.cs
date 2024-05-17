@@ -47,10 +47,9 @@ namespace Supermarket
                     existeix = true;
                     if(kvp.Key.PackagingType == Packaging.Unit || kvp.Key.PackagingType == Packaging.Package)
                     {
-                        if (Convert.ToString(qty).Contains(".")) throw new Exception("QUANTITY CANNOT HAVE DECIMALS WHEN THE ITEM PACKAGING IS UNITS OR PACKAGES");
-                        shoppingList[kvp.Key] += qty;
+                        shoppingList[kvp.Key] += (int)qty;
                     }
-                    else shoppingList[kvp.Key] += qty;
+                    else shoppingList[kvp.Key] += Math.Round(qty, 2);
                 }
             }
             if (!existeix) shoppingList.Add(item, qty);
@@ -111,7 +110,8 @@ namespace Supermarket
             sb.Append($"INFO CARRITO DE COMPRA CLIENT -> {customer.FullName}\n");
             foreach (KeyValuePair<Item, double> kvp in shoppingList)
             {
-                sb.Append($"{kvp.Key.Description}   - CAT -->{kvp.Key.GetCategory}  - QTY -->{kvp.Value}    - UNIT PRICE -->{kvp.Key.Price} {kvp.Key.Currency}");
+                if(kvp.Key.PackagingType == Packaging.Unit || kvp.Key.PackagingType == Packaging.Package) sb.Append($"{kvp.Key.Description}   - CAT -->{kvp.Key.GetCategory}  - QTY -->{(int)kvp.Value}    - UNIT PRICE -->{kvp.Key.Price} {kvp.Key.Currency}\n");
+                else sb.Append($"{kvp.Key.Description}   - CAT -->{kvp.Key.GetCategory}  - QTY -->{Math.Round(kvp.Value,2)}    - UNIT PRICE -->{kvp.Key.Price} {kvp.Key.Currency}\n");
             }
             sb.Append("*****FI CARRITO COMPRA*****");
 
