@@ -187,7 +187,7 @@ namespace Supermarket
             {
                 lines[line2Open - 1] = new CheckOutLine(GetAvailableCashier(), line2Open);
             }
-            else throw new Exception("THIS LINES ALREADY EXISTS");
+            else throw new Exception("THIS LINE ALREADY EXISTS");
         }
 
         public CheckOutLine GetCheckOutLine(int lineNumber) 
