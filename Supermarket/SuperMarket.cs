@@ -13,7 +13,7 @@ namespace Supermarket
         private string name;
         private string address;
         private int activeLines;
-        // private CheckOutLine[] lines = new CheckOutLine[MAXLINES];
+        private CheckOutLine[] lines = new CheckOutLine[MAXLINES];
         private Dictionary<string, Person> staff;
         private Dictionary<string, Person> customers;
         private SortedDictionary<int, Item> warehouse;
@@ -33,7 +33,7 @@ namespace Supermarket
             this.staff = LoadCashier(fileCashiers);
             this.customers = LoadCustomers(fileCustomers);
             this.warehouse = LoadWarehous(fileItems);
-
+            OpenCheckOutLine(activeLines);
         }
 
         #region LOAD DICTIONARIES FROM FILES
@@ -143,7 +143,7 @@ namespace Supermarket
             }
             return availableCustomer;
         }
-        public Person GetAvailableCashier(Person cashier)
+        public Person GetAvailableCashier()
         {
             Person[] valorStaff = staff.Values.ToArray();
             Person availableStaff = null;
@@ -173,6 +173,55 @@ namespace Supermarket
         public int ActiveLines { get { return activeLines; } }
 
         #endregion
+
+        public void OpenCheckOutLine(int line2Open)
+        {
+            Random rNumber = new Random();
+            int numLinia = 0;
+            int j = 0;
+
+            while (j < line2Open)
+            {
+                bool existeix = false;
+                numLinia = rNumber.Next(1, 6);
+
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i] != null && lines[i].Number == numLinia)
+                    {
+                        existeix = true;
+                    }
+                }
+
+                if (!existeix)
+                {
+                    CheckOutLine staff = new CheckOutLine(GetAvailableCashier(), numLinia);
+                    lines[j] = staff;
+                    j++;
+                }
+            }
+        }
+
+        public CheckOutLine GetCheckOutLine(int lineNumber) 
+        {
+            if (lineNumber is default(int)) throw new ArgumentNullException("INCORRECT LINE NUMBER");
+            int i = 0;
+            bool trobat = false;
+            CheckOutLine line = null;
+
+            while (i < lines.Length && !trobat)
+            {
+                if (lines[i].Number == lineNumber)
+                {
+                    trobat = true;
+                    line = lines[i];
+                }
+                    
+                else i++;
+            }
+
+            return line;
+        }
 
         public override string ToString()
         {
