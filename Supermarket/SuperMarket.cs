@@ -212,10 +212,14 @@ namespace Supermarket
             return line;
         }
 
-        public bool JoinTheQueue(ShoppingCart theCart, int line) 
+        public bool JoinTheQueue(ShoppingCart theCart, int line)
         {
-            bool lineInterval;
+            bool posible = false;
 
+
+
+
+            return posible;
         }
         public override string ToString()
         {

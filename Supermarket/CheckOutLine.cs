@@ -18,6 +18,7 @@ namespace Supermarket
             this.cashier = responsible;
             queue = new Queue<ShoppingCart>();
             this.number = number;
+            this.active = true;
         }
 
         public int Number { get { return number; } }
