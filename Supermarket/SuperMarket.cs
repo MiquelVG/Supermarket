@@ -169,6 +169,8 @@ namespace Supermarket
 
         public Dictionary<string, Person> Customers { get { return customers; } }
 
+        public CheckOutLine[] Lines { get { return lines; } }
+
         public int ActiveLines { get { return activeLines; } }
 
         #endregion
@@ -181,13 +183,14 @@ namespace Supermarket
 
             for (int i = 0; i < lines.Length; i++)
             {
-                if (lines[i].Number == line2Open) trobat = true;
+                if (lines[i] != null && lines[i].Number == line2Open) trobat = true;
             }
             if (!trobat)
             {
                 lines[line2Open - 1] = new CheckOutLine(GetAvailableCashier(), line2Open);
+                activeLines++;
             }
-            else throw new Exception("THIS LINES ALREADY EXISTS");
+            else throw new Exception("THIS LINE ALREADY EXISTS");
         }
 
         public CheckOutLine GetCheckOutLine(int lineNumber) 
@@ -197,7 +200,7 @@ namespace Supermarket
             bool trobat = false;
             CheckOutLine line = null;
 
-            if (lines[lineNumber - 1].Number == lineNumber) line = lines[lineNumber - 1]; 
+            if (lines[lineNumber-1] != null && lines[lineNumber - 1].Number == lineNumber) line = lines[lineNumber - 1]; 
 
             return line;
         }
