@@ -29,7 +29,7 @@ namespace Supermarket
 
             this.name = name;
             this.address = address;
-            this.activeLines = activeLines;
+            this.activeLines = 0;
             this.staff = LoadCashier(fileCashiers);
             this.customers = LoadCustomers(fileCustomers);
             this.warehouse = LoadWarehous(fileItems);
@@ -185,17 +185,9 @@ namespace Supermarket
             if (line2Open < 1 || line2Open > 5) throw new IndexOutOfRangeException("INCORRECT LINE NUMBER");
             CheckOutLine line = null;
             bool trobat = false;
-
-            for (int i = 0; i < lines.Length; i++)
-            {
-                if (lines[i] != null && lines[i].Number == line2Open) trobat = true;
-            }
-            if (!trobat)
-            {
-                lines[line2Open - 1] = new CheckOutLine(GetAvailableCashier(), line2Open);
-                activeLines++;
-            }
-            else throw new Exception("THIS LINE ALREADY EXISTS");
+            
+            lines[line2Open-1] = new CheckOutLine(GetAvailableCashier(), line2Open);
+            activeLines++;
         }
 
         public CheckOutLine GetCheckOutLine(int lineNumber) 
@@ -203,9 +195,9 @@ namespace Supermarket
             if (lineNumber < 1 || lineNumber > 5) throw new IndexOutOfRangeException("INCORRECT LINE NUMBER");
             if (lineNumber is default(int)) throw new ArgumentNullException("INCORRECT LINE NUMBER");
             bool trobat = false;
-            CheckOutLine line = null;
+            CheckOutLine? line = null;
 
-            if (lines[lineNumber-1] != null && lines[lineNumber - 1].Number == lineNumber) line = lines[lineNumber - 1]; 
+            if (lines[lineNumber - 1].Number == lineNumber) line = lines[lineNumber - 1]; 
 
             return line;
         }

@@ -172,20 +172,14 @@ namespace Super
 
             Random rand = new Random();
             bool disponible = false;
-            int i = 0;
+            int numLinia = rand.Next(1, super.ActiveLines+1);
             ShoppingCart[] carts = carros.Values.ToArray();
             if (carts.Length != 0)
             {
                 if (super.ActiveLines != 0)
                 {
                     ShoppingCart cart = carts[rand.Next(0, carts.Length)];
-                    while (i < super.Lines.Length && !disponible)
-                    {
-                        CheckOutLine cua = super.Lines[i];
-                        if (cua != null && cua.Active) disponible = true;
-                        i++;
-                    }
-                    super.JoinTheQueue(cart, i);
+                    super.JoinTheQueue(cart, numLinia);
                 }
                 else Console.WriteLine("NO HI HA CAIXES ACTIVES");
             }
@@ -219,10 +213,11 @@ namespace Super
         // OPCIO 5 : Obrir la següent cua disponible (si n'hi ha)
         public static bool DoOpenCua(SuperMarket super)
         {
+            Console.Clear();
             bool fet = true;
-            int line = super.ActiveLines;
+            int line = super.ActiveLines+1;
 
-            if (line >= 6)
+            if (line == 6)
             {
                 Console.WriteLine("NO HI HA CUES PER OBRIR");
                 fet = false;
