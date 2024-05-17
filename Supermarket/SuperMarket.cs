@@ -33,6 +33,11 @@ namespace Supermarket
             this.staff = LoadCashier(fileCashiers);
             this.customers = LoadCustomers(fileCustomers);
             this.warehouse = LoadWarehous(fileItems);
+
+            for (int i = 1; i <= activeLines; i++)
+            {
+                OpenCheckOutLine(i);
+            }
         }
 
         #region LOAD DICTIONARIES FROM FILES
