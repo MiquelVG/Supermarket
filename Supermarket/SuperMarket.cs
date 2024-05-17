@@ -33,7 +33,6 @@ namespace Supermarket
             this.staff = LoadCashier(fileCashiers);
             this.customers = LoadCustomers(fileCustomers);
             this.warehouse = LoadWarehous(fileItems);
-            OpenCheckOutLine(activeLines);
         }
 
         #region LOAD DICTIONARIES FROM FILES
@@ -176,34 +175,24 @@ namespace Supermarket
 
         public void OpenCheckOutLine(int line2Open)
         {
-            Random rNumber = new Random();
-            int numLinia = 0;
-            int j = 0;
+            if (line2Open < 1 || line2Open > 5) throw new IndexOutOfRangeException("INCORRECT LINE NUMBER");
+            CheckOutLine line = null;
+            bool trobat = false;
 
-            while (j < line2Open)
+            for (int i = 0; i < lines.Length; i++)
             {
-                bool existeix = false;
-                numLinia = rNumber.Next(1, 6);
-
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i] != null && lines[i].Number == numLinia)
-                    {
-                        existeix = true;
-                    }
-                }
-
-                if (!existeix)
-                {
-                    CheckOutLine staff = new CheckOutLine(GetAvailableCashier(), numLinia);
-                    lines[j] = staff;
-                    j++;
-                }
+                if (lines[i].Number == line2Open) trobat = true;
             }
+            if (!trobat)
+            {
+                lines[line2Open - 1] = new CheckOutLine(GetAvailableCashier(), line2Open);
+            }
+            else throw new Exception("THIS LINES ALREADY EXISTS");
         }
 
         public CheckOutLine GetCheckOutLine(int lineNumber) 
         {
+            if (lineNumber < 1 || lineNumber > 5) throw new IndexOutOfRangeException("INCORRECT LINE NUMBER");
             if (lineNumber is default(int)) throw new ArgumentNullException("INCORRECT LINE NUMBER");
             int i = 0;
             bool trobat = false;
@@ -224,13 +213,6 @@ namespace Supermarket
         }
 
         public bool JoinTheQueue(ShoppingCart theCart, int line)
-        {
-            bool posible = false;
-
-
-
-            return posible;
-        }
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
