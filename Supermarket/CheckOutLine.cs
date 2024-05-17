@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Supermarket
 {
-    internal class CheckOutLine
+    public class CheckOutLine
     {
         private int number;
         private Queue<ShoppingCart> queue;
@@ -20,6 +20,9 @@ namespace Supermarket
             this.number = number;
         }
 
+        public int Number { get { return number; } }
+        public Person Cashier { get { return cashier; } }
+        public bool Active { get { return active; } }
         public bool CheckIn(ShoppingCart oneShoppingCart)
         {
             bool possible = false;
