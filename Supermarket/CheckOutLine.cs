@@ -27,7 +27,7 @@ namespace Supermarket
         public bool CheckIn(ShoppingCart oneShoppingCart)
         {
             bool possible = false;
-            if (active)
+            if (Active)
             {
                 queue.Enqueue(oneShoppingCart);
                 possible = true;
@@ -38,7 +38,7 @@ namespace Supermarket
         public bool CheckOut()
         {
             bool possible = false;
-            if (active && queue.Count != 0)
+            if (Active && queue.Count != 0)
             {
                 possible = true;
                 ShoppingCart cart = queue.Dequeue();
