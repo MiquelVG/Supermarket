@@ -223,6 +223,7 @@ namespace Supermarket
             return line;
         }
 
+        public bool JoinTheQueue(ShoppingCart theCart, int line)
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

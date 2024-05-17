@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Supermarket
 {
-    internal class ShoppingCart
+    public class ShoppingCart
     {
         private Dictionary<Item, double> shoppingList;
         private Customer customer;
