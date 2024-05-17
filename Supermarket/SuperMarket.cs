@@ -215,12 +215,25 @@ namespace Supermarket
         public bool JoinTheQueue(ShoppingCart theCart, int line)
         {
             bool posible = false;
+            CheckOutLine cua;
 
-
-
+            cua = GetCheckOutLine(line);
+            if (cua is not null) posible = cua.CheckIn(theCart);
 
             return posible;
         }
+
+        public bool CheckOut(int line)
+        {
+            bool posible = false;
+            CheckOutLine cua;
+
+            cua = GetCheckOutLine(line);
+            if (cua is not null) posible = cua.CheckOut();
+
+            return posible;
+        }
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
