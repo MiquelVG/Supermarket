@@ -194,20 +194,10 @@ namespace Supermarket
         {
             if (lineNumber < 1 || lineNumber > 5) throw new IndexOutOfRangeException("INCORRECT LINE NUMBER");
             if (lineNumber is default(int)) throw new ArgumentNullException("INCORRECT LINE NUMBER");
-            int i = 0;
             bool trobat = false;
             CheckOutLine line = null;
 
-            while (i < lines.Length && !trobat)
-            {
-                if (lines[i].Number == lineNumber)
-                {
-                    trobat = true;
-                    line = lines[i];
-                }
-                    
-                else i++;
-            }
+            if (lines[lineNumber - 1].Number == lineNumber) line = lines[lineNumber - 1]; 
 
             return line;
         }
@@ -237,21 +227,11 @@ namespace Supermarket
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append($"{this.name}    {this.address}  {this.activeLines}\n");
-            sb.Append("STAFF INFORMATION ---------------------------------------------\n");
-            foreach (KeyValuePair<string, Person> cashier in staff)
+            sb.Append($"{name}\n");
+            sb.Append($"{address}\n");
+            foreach (CheckOutLine line in lines) 
             {
-                sb.Append($"{cashier.Value}\n");
-            }
-            sb.Append("COSTUMERS INFORMATION ---------------------------------------------\n");
-            foreach (KeyValuePair<string, Person> costumer in customers)
-            {
-                sb.Append($"{costumer.Value}\n");
-            }
-            sb.Append("STOCK INFORMATION ---------------------------------------------\n");
-            foreach (KeyValuePair<int, Item>item in warehouse)
-            {
-                sb.Append($"{item.Value}\n");
+                sb.Append($"{line.ToString()}\n");
             }
             return sb.ToString();
         }
