@@ -43,7 +43,8 @@ namespace Supermarket
                 ShoppingCart cart = queue.Dequeue();
                 double grossAmount = ShoppingCart.ProcessItems(cart);
                 int rawPoints = cart.RawPointsObtainedAtCheckout(grossAmount);
-                // Falta afegir totalInvoiced a Cashier i Customer.
+                cashier.AddInvoiceAmount(grossAmount);
+                cart.Customer.AddInvoiceAmount(grossAmount);
                 cashier.AddPoints(rawPoints);
                 cart.Customer.AddPoints(rawPoints);
                 cart.Customer.Active = false;
