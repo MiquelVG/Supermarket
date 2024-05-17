@@ -227,7 +227,12 @@ namespace Supermarket
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            
+            sb.Append($"{name}\n");
+            sb.Append($"{address}\n");
+            foreach (CheckOutLine line in lines) 
+            {
+                sb.Append($"{line.ToString()}\n");
+            }
             return sb.ToString();
         }
     }
