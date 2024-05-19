@@ -23,7 +23,12 @@ namespace Supermarket
 
         public int Number { get { return number; } }
         public Person Cashier { get { return cashier; } }
-        public bool Active { get { return active; } }
+        public bool Active 
+        {
+            get { return active; }
+            set { active = value; }
+        }
+        public bool Empty { get { return queue.Count == 0 ; } }
         public bool CheckIn(ShoppingCart oneShoppingCart)
         {
             bool possible = false;

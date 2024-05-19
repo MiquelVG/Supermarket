@@ -176,7 +176,7 @@ namespace Supermarket
 
         public CheckOutLine[] Lines { get { return lines; } }
 
-        public int ActiveLines { get { return activeLines; } }
+        public int ActiveLines { get { return activeLines; }}
 
         #endregion
 
@@ -190,14 +190,14 @@ namespace Supermarket
             activeLines++;
         }
 
-        public CheckOutLine GetCheckOutLine(int lineNumber) 
+        public CheckOutLine? GetCheckOutLine(int lineNumber) 
         {
             if (lineNumber < 1 || lineNumber > 5) throw new IndexOutOfRangeException("INCORRECT LINE NUMBER");
             if (lineNumber is default(int)) throw new ArgumentNullException("INCORRECT LINE NUMBER");
             bool trobat = false;
             CheckOutLine? line = null;
 
-            if (lines[lineNumber - 1].Number == lineNumber) line = lines[lineNumber - 1]; 
+            if (lines[lineNumber - 1] is not null && lines[lineNumber - 1].Number == lineNumber) line = lines[lineNumber - 1]; 
 
             return line;
         }
@@ -222,6 +222,22 @@ namespace Supermarket
             if (cua is not null) posible = cua.CheckOut();
 
             return posible;
+        }
+
+        public static bool RemoveQueue(SuperMarket super, int lineToRemove)
+        {
+            bool fet = false;
+            CheckOutLine line;
+
+            line = super.GetCheckOutLine(lineToRemove);
+            if (line.Empty)
+            {
+                line.Active = false;
+                super.activeLines--;
+                fet = true;
+            }
+
+            return fet;
         }
 
         public override string ToString()
