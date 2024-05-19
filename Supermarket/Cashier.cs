@@ -45,8 +45,7 @@ namespace Supermarket
 
         public override void AddPoints(int pointsToAdd)
         {
-            if (pointsToAdd <= 0) throw new IndexOutOfRangeException("POINTS CAN'T BE NEGATIVE OR ZERO");
-            if (pointsToAdd is default(int)) throw new ArgumentNullException("POINTS CAN'T BE NULL");
+            if (pointsToAdd < 0) throw new IndexOutOfRangeException("POINTS CAN'T BE NEGATIVE");
 
             _points += (this.YearsOfService + 1) * pointsToAdd;
         }

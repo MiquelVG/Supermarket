@@ -180,6 +180,7 @@ namespace Super
                 {
                     ShoppingCart cart = carts[rand.Next(0, carts.Length)];
                     super.JoinTheQueue(cart, numLinia);
+                    carros.Remove(cart.Customer);
                 }
                 else Console.WriteLine("NO HI HA CAIXES ACTIVES");
             }
@@ -200,7 +201,23 @@ namespace Super
         public static bool DoCheckOut(SuperMarket super)
         {
             bool fet = true;
+            int cua;
             Console.Clear();
+            Console.WriteLine($"DE QUINA CUA VOLS FER UN CHECKOUT? (1..{super.ActiveLines})");
+            cua = Convert.ToInt32(Console.ReadLine());
+            if (cua < 1 || cua > super.ActiveLines)
+            {
+                Console.Clear();
+                Console.WriteLine("ERROR. CUA INEXISTENT O INACTIVA");
+                fet = false;
+            }
+            else
+            {
+                fet = super.CheckOut(cua);
+                Console.Clear();
+                if (!fet) Console.WriteLine("NO HA SIGUT POSSIBLE FER CHECKOUT. CUA BUIDA");
+                
+            }
             MsgNextScreen("PREM UNA TECLA PER ANAR AL MENÚ PRINCIPAL");
             return fet;
         }
@@ -281,7 +298,7 @@ namespace Super
         {
 
             Console.Clear();
-
+            foreach (KeyValuePair<string, Person> kyp in super.Customers) Console.WriteLine(kyp.Value);
             MsgNextScreen("PREM UNA TECLA PER CONTINUAR");
 
         }
