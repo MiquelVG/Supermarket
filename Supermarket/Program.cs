@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection.PortableExecutable;
+using System.Runtime.CompilerServices;
+using System.Xml.XPath;
 
 namespace Super
 {
@@ -77,9 +79,9 @@ namespace Super
 
                         break;
 
-                    //case ConsoleKey.D9:
-                    //    HashSet<Item> articlesOrdenatsPerEstoc = super.GetItemsByStock();
-                    //    DoListArticlesByStock("LLISTAT D'ARTICLES - DATA " + DateTime.Now, articlesOrdenatsPerEstoc);
+                    case ConsoleKey.D9:
+                        HashSet<Item> articlesOrdenatsPerEstoc = super.GetItemsByStock();
+                        DoListArticlesByStock("LLISTAT D'ARTICLES - DATA " + DateTime.Now, articlesOrdenatsPerEstoc);
 
                         break;
                     case ConsoleKey.A:
@@ -232,14 +234,31 @@ namespace Super
         {
             Console.Clear();
             bool fet = true;
-            int line = super.ActiveLines+1;
+            bool inactiva = false;
+            CheckOutLine? linia;
+            int line = 1;
 
-            if (line == 6)
+            if (super.ActiveLines == 5)
             {
                 Console.WriteLine("NO HI HA CUES PER OBRIR");
                 fet = false;
             }
-            else super.OpenCheckOutLine(line);
+
+            while (line <= 5 && !inactiva)
+            {
+                linia = super.GetCheckOutLine(line);
+                if (linia is null)
+                {
+                    super.OpenCheckOutLine(line);
+                    inactiva = true;
+                }
+                else if (!linia.Active)
+                {
+                    linia.Active = true;
+                    inactiva = true;
+                }
+                else line++;
+            }
 
             MsgNextScreen("PREM UNA TECLA PER ANAR AL MENÚ PRINCIPAL");
             return fet;
@@ -257,7 +276,7 @@ namespace Super
 
             foreach (CheckOutLine line in super.Lines) 
             {
-                if (line is not null)
+                if (line is not null && line.Active)
                 {
                     Console.WriteLine(line.ToString());
                     Console.ReadKey();
@@ -309,11 +328,11 @@ namespace Super
         /// </summary>
         /// <param name="header">Text de capçalera del llistat</param>
         /// <param name="items">articles que ja vindran preparats en la ordenació desitjada</param>
-        public static void DoListArticlesByStock(String header, SortedSet<Item> items)
+        public static void DoListArticlesByStock(String header, HashSet<Item> items)
         {
             Console.Clear();
             Console.WriteLine(header);
-
+            foreach(Item item in items) Console.WriteLine(item);
 
             MsgNextScreen("PREM UNA TECLA PER CONTINUAR");
         }
@@ -332,8 +351,14 @@ namespace Super
         public static void DoCloseQueue(SuperMarket super)
         {
             Console.Clear();
+            bool fet = false;
+            int linia = super.ActiveLines;
 
-
+            while (!fet)
+            {
+                fet = SuperMarket.RemoveQueue(super, linia);
+                linia--;
+            }
 
             MsgNextScreen("PREM UNA TECLA PER CONTINUAR");
         }
