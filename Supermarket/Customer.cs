@@ -23,8 +23,7 @@ namespace Supermarket
         #region OVERRIDE
         public override void AddPoints(int pointsToAdd)
         {
-            if (pointsToAdd <= 0) throw new ArgumentOutOfRangeException("POINTS CAN'T BE NEGATIVE OR ZERO");
-            if (pointsToAdd is default(int)) throw new ArgumentNullException("POINTS CAN'T BE NULL");
+            if (pointsToAdd < 0) throw new ArgumentOutOfRangeException("POINTS CAN'T BE NEGATIVE");
 
             if (_fidelity_card is not null) _points += pointsToAdd;
         }
